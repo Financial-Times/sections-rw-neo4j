@@ -1,7 +1,6 @@
 package sections
 
 import (
-	"fmt"
 	"os"
 	"testing"
 
@@ -128,9 +127,7 @@ func TestWritePrefLabelIsAlsoWrittenAndIsEqualToName(t *testing.T) {
 	uuid := "12345"
 	sectionToWrite := Section{UUID: uuid, CanonicalName: "Test", TmeIdentifier: "TME_ID"}
 
-	storedSection := sectionsDriver.Write(sectionToWrite)
-
-	fmt.Printf("", storedSection)
+	assert.NoError(sectionsDriver.Write(sectionToWrite), "Failed to write section")
 
 	result := []struct {
 		PrefLabel string `json:"t.prefLabel"`
