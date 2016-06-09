@@ -24,7 +24,6 @@ func (s service) Initialise() error {
 		"Concept":           "uuid",
 		"Classification":    "uuid",
 		"Section":           "uuid",
-		"FactsetIdentifier": "value",
 		"TMEIdentifier":     "value",
 		"UPPIdentifier":     "value"})
 }
@@ -35,10 +34,8 @@ func (s service) Read(uuid string) (interface{}, bool, error) {
 	query := &neoism.CypherQuery{
 		Statement: `MATCH (n:Section {uuid:{uuid}})
 OPTIONAL MATCH (upp:UPPIdentifier)-[:IDENTIFIES]->(n)
-OPTIONAL MATCH (fs:FactsetIdentifier)-[:IDENTIFIES]->(n)
 OPTIONAL MATCH (tme:TMEIdentifier)-[:IDENTIFIES]->(n)
-OPTIONAL MATCH (lei:LegalEntityIdentifier)-[:IDENTIFIES]->(n)
-return distinct n.uuid as uuid, n.prefLabel as prefLabel, labels(n) as types, {uuids:collect(distinct upp.value), TME:collect(distinct tme.value), factsetIdentifier:fs.value, leiCode:lei.value} as alternativeIdentifiers`,
+return distinct n.uuid as uuid, n.prefLabel as prefLabel, labels(n) as types, {uuids:collect(distinct upp.value), TME:collect(distinct tme.value)} as alternativeIdentifiers`,
 		Parameters: map[string]interface{}{
 			"uuid": uuid,
 		},
