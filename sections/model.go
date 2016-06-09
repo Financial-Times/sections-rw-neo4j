@@ -2,10 +2,24 @@ package sections
 
 type Section struct {
 	UUID          string `json:"uuid"`
-	CanonicalName string `json:"canonicalName"`
-	TmeIdentifier string `json:"tmeIdentifier,omitempty"`
-	Type          string `json:"type,omitempty"`
+	PrefLabel              string                 `json:"prefLabel"`
+	AlternativeIdentifiers alternativeIdentifiers `json:"alternativeIdentifiers"`
+	Types                  []string               `json:"types,omitempty"`
 }
+
+type alternativeIdentifiers struct {
+	TME               []string `json:"TME,omitempty"`
+	FactsetIdentifier string   `json:"factsetIdentifier,omitempty"`
+	LeiCode           string   `json:"leiCode,omitempty"`
+	UUIDS             []string `json:"uuids"`
+}
+
+const (
+	factsetIdentifierLabel = "FactsetIdentifier"
+	leiIdentifierLabel     = "LegalEntityIdentifier"
+	tmeIdentifierLabel     = "TMEIdentifier"
+	uppIdentifierLabel     = "UPPIdentifier"
+)
 
 type SectionLink struct {
 	ApiUrl string `json:"apiUrl"`
