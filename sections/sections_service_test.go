@@ -10,8 +10,8 @@ import (
 )
 
 const (
-	sectionUUID            = "12345"
-	newSectionUUID         = "123456"
+	sectionUUID          = "12345"
+	newSectionUUID       = "123456"
 	tmeID                = "TME_ID"
 	newTmeID             = "NEW_TME_ID"
 	fsetID               = "fset_ID"

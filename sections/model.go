@@ -1,7 +1,7 @@
 package sections
 
 type Section struct {
-	UUID          string `json:"uuid"`
+	UUID                   string                 `json:"uuid"`
 	PrefLabel              string                 `json:"prefLabel"`
 	AlternativeIdentifiers alternativeIdentifiers `json:"alternativeIdentifiers"`
 	Types                  []string               `json:"types,omitempty"`

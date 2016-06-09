@@ -20,10 +20,10 @@ func NewCypherSectionsService(cypherRunner neoutils.CypherRunner, indexManager n
 
 func (s service) Initialise() error {
 	return neoutils.EnsureConstraints(s.indexManager, map[string]string{
-		"Thing":   "uuid",
-		"Concept": "uuid",
-		"Classification": "uuid",
-		"Section":   "uuid",
+		"Thing":             "uuid",
+		"Concept":           "uuid",
+		"Classification":    "uuid",
+		"Section":           "uuid",
 		"FactsetIdentifier": "value",
 		"TMEIdentifier":     "value",
 		"UPPIdentifier":     "value"})
@@ -71,7 +71,7 @@ func (s service) Write(thing interface{}) error {
 			"uuid": section.UUID,
 		},
 	}
-	
+
 	//create-update node for SECTION
 	createSectionQuery := &neoism.CypherQuery{
 		Statement: `MERGE (n:Thing {uuid: {uuid}})
