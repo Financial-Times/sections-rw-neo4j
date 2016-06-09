@@ -92,16 +92,6 @@ func (s service) Write(thing interface{}) error {
 	queryBatch := []*neoism.CypherQuery{deletePreviousIdentifiersQuery, createSectionQuery}
 
 	//ADD all the IDENTIFIER nodes and IDENTIFIES relationships
-	if section.AlternativeIdentifiers.FactsetIdentifier != "" {
-		factsetIdentifierQuery := createNewIdentifierQuery(section.UUID, factsetIdentifierLabel, section.AlternativeIdentifiers.FactsetIdentifier)
-		queryBatch = append(queryBatch, factsetIdentifierQuery)
-	}
-
-	if section.AlternativeIdentifiers.LeiCode != "" {
-		leiCodeIdentifierQuery := createNewIdentifierQuery(section.UUID, leiIdentifierLabel, section.AlternativeIdentifiers.LeiCode)
-		queryBatch = append(queryBatch, leiCodeIdentifierQuery)
-	}
-
 	for _, alternativeUUID := range section.AlternativeIdentifiers.TME {
 		alternativeIdentifierQuery := createNewIdentifierQuery(section.UUID, tmeIdentifierLabel, alternativeUUID)
 		queryBatch = append(queryBatch, alternativeIdentifierQuery)

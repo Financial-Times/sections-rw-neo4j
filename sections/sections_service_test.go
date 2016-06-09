@@ -14,8 +14,6 @@ const (
 	newSectionUUID       = "123456"
 	tmeID                = "TME_ID"
 	newTmeID             = "NEW_TME_ID"
-	fsetID               = "fset_ID"
-	leiCodeID            = "leiCode"
 	prefLabel            = "Test"
 	specialCharPrefLabel = "Test 'special chars"
 )
@@ -68,7 +66,7 @@ func TestCreateCompleteSectionWithPropsAndIdentifiers(t *testing.T) {
 	assert := assert.New(t)
 	sectionsDriver := getSectionsCypherDriver(t)
 
-	alternativeIdentifiers := alternativeIdentifiers{TME: []string{tmeID}, UUIDS: []string{sectionUUID}, FactsetIdentifier: fsetID, LeiCode: leiCodeID}
+	alternativeIdentifiers := alternativeIdentifiers{TME: []string{tmeID}, UUIDS: []string{sectionUUID}}
 	sectionToWrite := Section{UUID: sectionUUID, PrefLabel: prefLabel, AlternativeIdentifiers: alternativeIdentifiers}
 
 	assert.NoError(sectionsDriver.Write(sectionToWrite), "Failed to write section")
@@ -84,7 +82,7 @@ func TestUpdateWillRemovePropertiesAndIdentifiersNoLongerPresent(t *testing.T) {
 	assert := assert.New(t)
 	sectionsDriver := getSectionsCypherDriver(t)
 
-	allAlternativeIdentifiers := alternativeIdentifiers{TME: []string{}, UUIDS: []string{sectionUUID}, FactsetIdentifier: fsetID, LeiCode: leiCodeID}
+	allAlternativeIdentifiers := alternativeIdentifiers{TME: []string{}, UUIDS: []string{sectionUUID}}
 	sectionToWrite := Section{UUID: sectionUUID, PrefLabel: prefLabel, AlternativeIdentifiers: allAlternativeIdentifiers}
 
 	assert.NoError(sectionsDriver.Write(sectionToWrite), "Failed to write section")
