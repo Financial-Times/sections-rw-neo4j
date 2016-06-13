@@ -38,7 +38,7 @@ func TestCreateSectionNotAllIdentifiersPresent(t *testing.T) {
 	assert := assert.New(t)
 	sectionsDriver := getSectionsCypherDriver(t)
 
-	alternativeIds := alternativeIdentifiers{UUIDS: []string{sectionUUID}}
+	alternativeIds := alternativeIdentifiers{TME: []string{}, UUIDS: []string{sectionUUID}}
 	sectionToWrite := Section{UUID: sectionUUID, PrefLabel: prefLabel, AlternativeIdentifiers: alternativeIds}
 
 	assert.NoError(sectionsDriver.Write(sectionToWrite), "Failed to write section")
@@ -72,7 +72,7 @@ func TestUpdateWillRemovePropertiesAndIdentifiersNoLongerPresent(t *testing.T) {
 	assert.NoError(sectionsDriver.Write(sectionToWrite), "Failed to write section")
 	readSectionForUUIDAndCheckFieldsMatch(assert, sectionsDriver, sectionUUID, sectionToWrite)
 
-	tmeAlternativeIds := alternativeIdentifiers{UUIDS: []string{sectionUUID}}
+	tmeAlternativeIds := alternativeIdentifiers{TME: []string{}, UUIDS: []string{sectionUUID}}
 	updatedSection := Section{UUID: sectionUUID, PrefLabel: prefLabel, AlternativeIdentifiers: tmeAlternativeIds}
 
 	assert.NoError(sectionsDriver.Write(updatedSection), "Failed to write updated section")
