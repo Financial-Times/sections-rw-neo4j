@@ -6,6 +6,7 @@ import (
 
 	"github.com/Financial-Times/neo-utils-go/neoutils"
 	"github.com/stretchr/testify/assert"
+	"sort"
 )
 
 const (
@@ -147,8 +148,15 @@ func TestCount(t *testing.T) {
 }
 
 func readSectionForUUIDAndCheckFieldsMatch(t *testing.T, sectionsDriver service, uuid string, expectedSection Section) {
+	section, found, err := sectionsDriver.Read(uuid)
+	sort.Strings(expectedSection.Types)
+	sort.Strings(expectedSection.AlternativeIdentifiers.TME)
+	sort.Strings(expectedSection.AlternativeIdentifiers.UUIDS)
 
-	storedSection, found, err := sectionsDriver.Read(uuid)
+	storedSection := section.(Section)
+	sort.Strings(storedSection.Types)
+	sort.Strings(storedSection.AlternativeIdentifiers.TME)
+	sort.Strings(storedSection.AlternativeIdentifiers.UUIDS)
 
 	assert.NoError(t, err, "Error finding section for uuid %s", uuid)
 	assert.True(t, found, "Didn't find section for uuid %s", uuid)
